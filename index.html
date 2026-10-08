@@ -22,7 +22,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tab{border:0;background:transparent;padding:8px 12px;border-radius:999px;cursor:pointer;color:var(--mute);font-weight:600}
 .tab[aria-current="true"]{background:var(--acc);color:var(--accink)}
-h1{font-size:clamp(22px,5vw,36px);line-height:1.15;margin:20px 0 8px;font-weight:800}
+h1{font-size:clamp(26px,6vw,40px);line-height:1.15;margin:28px 0 8px;font-weight:800}
 .sub{color:var(--mute);margin:0 0 20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding-bottom:90px}
 .p{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
@@ -38,9 +38,9 @@ h1{font-size:clamp(22px,5vw,36px);line-height:1.15;margin:20px 0 8px;font-weight
 .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
 label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
 input,select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
-.two{display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:10px}
-.prow{display:flex;flex-direction:column;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
-.prow img,.prow .ph{width:100%;height:140px;border-radius:12px;object-fit:cover;background:var(--line);display:grid;place-items:center;color:var(--mute)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.prow{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.prow img,.prow .ph{width:84px;height:84px;border-radius:12px;object-fit:cover;background:var(--line);display:grid;place-items:center;color:var(--mute)}
 .code{font-size:44px;font-weight:800;letter-spacing:.12em;text-align:center;margin:12px 0 4px;font-variant-numeric:tabular-nums}
 .meter{height:6px;background:var(--line);border-radius:6px;overflow:hidden}
 .meter i{display:block;height:100%;background:var(--acc);transition:width .9s linear}
@@ -130,7 +130,7 @@ function csHtml(){
 }
 
 function shop(){
-  return '<section style="padding:20px 0 6px"><h1 style="margin:0 0 10px">Produk digital, pemesanan langsung via WhatsApp</h1><p class="sub">Pilih produk, lalu konfirmasi dan lakukan pembayaran via chat WhatsApp.</p></section><div class="trust"><div><b>Produk diperiksa</b>Info dan stok dicek sebelum tampil.</div><div><b>Harga jelas</b>Spesifikasi dan ketentuan ditulis lengkap.</div><div><b>Kirim cepat</b>Pesanan diproses setelah pembayaran masuk.</div></div><div class="tools"><input type="search" id="q" placeholder="Cari produk..." aria-label="Cari produk" value="'+esc(q)+'"><div class="chips" id="chips"></div></div><div class="grid" id="grid"></div>';
+  return '<section style="padding:28px 0 6px"><h1 style="margin:0 0 10px">Produk digital, pemesanan langsung via WhatsApp</h1><p class="sub">Pilih produk, lalu konfirmasi dan lakukan pembayaran via chat WhatsApp.</p></section><div class="trust"><div><b>Produk diperiksa</b>Info dan stok dicek sebelum tampil.</div><div><b>Harga jelas</b>Spesifikasi dan ketentuan ditulis lengkap.</div><div><b>Kirim cepat</b>Pesanan diproses setelah pembayaran masuk.</div></div><div class="tools"><input type="search" id="q" placeholder="Cari produk..." aria-label="Cari produk" value="'+esc(q)+'"><div class="chips" id="chips"></div></div><div class="grid" id="grid"></div>';
 }
 
 function chips(){
@@ -186,11 +186,11 @@ function tfa(){
 }
 
 function dash(){
-  var h='<h1>Dashboard Admin</h1><p class="sub">Perubahan di bawah akan langsung tersimpan di Database Supabase.</p><div class="box"><b>Pengaturan toko</b><label>Nama toko</label><input data-s="name" value="'+esc(S.s.name)+'"><label>Nomor WhatsApp (format 628xxx)</label><input data-s="wa" value="'+esc(S.s.wa)+'"></div><div class="box"><b>Daftar Produk</b>';
+  var h='<h1>Dashboard Admin</h1><p class="sub">Perubahan di bawah akan langsung tersimpan di Database Supabase.</p><div class="box"><b>Pengaturan toko</b><label>Nama toko</label><input data-s="name" value="'+esc(S.s.name)+'"><label>Nomor WhatsApp (format 628xxx)</label><input data-s="wa" value="'+esc(S.s.wa)+'"></div><div class="box"><b>Produk</b>';
   S.p.forEach(function(x,i){
-  h+='<div class="prow">'+(x.img?'<img src="'+esc(x.img)+'">':'<div class="ph">Belum Ada Foto Sampul</div>')+'<div><label>Nama Produk</label><input data-i="'+i+'" data-k="n" value="'+esc(x.n)+'"><div class="two"><div><label>Kategori</label><input data-i="'+i+'" data-k="c" value="'+esc(x.c)+'"></div><div><label>Harga (Rp)</label><input data-i="'+i+'" data-k="pr" value="'+esc(x.pr)+'"></div></div><div class="two"><div><label>Stok</label><input data-i="'+i+'" data-k="st" value="'+esc(x.st)+'"></div><div><label>Link Custom (Opsional)</label><input data-i="'+i+'" data-k="lk" value="'+esc(x.lk)+'"></div></div><label>Upload Foto Sampul</label><input type="file" accept="image/*" data-img-idx="'+i+'"><label>Atau Link Gambar (URL)</label><input data-i="'+i+'" data-k="img" placeholder="https://..." value="'+esc(x.img)+'"></div></div>';
+  h+='<div class="prow">'+(x.img?'<img src="'+esc(x.img)+'">':'<div class="ph">No Img</div>')+'<div><label>Nama Produk</label><input data-i="'+i+'" data-k="n" value="'+esc(x.n)+'"><div class="two"><div><label>Kategori</label><input data-i="'+i+'" data-k="c" value="'+esc(x.c)+'"></div><div><label>Harga (Rp)</label><input data-i="'+i+'" data-k="pr" value="'+esc(x.pr)+'"></div></div><div class="two"><div><label>Stok</label><input data-i="'+i+'" data-k="st" value="'+esc(x.st)+'"></div><div><label>Link Custom (Opsional)</label><input data-i="'+i+'" data-k="lk" value="'+esc(x.lk)+'"></div></div><label>Pilih Foto Sampul (Upload)</label><input type="file" accept="image/*" data-img-idx="'+i+'"><label>Atau Paste Link Gambar/URL</label><input data-i="'+i+'" data-k="img" placeholder="https://..." value="'+esc(x.img)+'"></div></div>';
   });
-  return h+'</div><button class="btn" id="save" style="margin-top:10px">Simpan Ke Database Cloud</button><div class="msg" id="nt" style="font-weight:bold;color:var(--acc)">'+esc(note)+'</div>';
+  return h+'</div><button class="btn" id="save">Simpan Ke Database Cloud</button><div class="msg" id="nt" style="font-weight:bold;color:var(--acc)">'+esc(note)+'</div>';
 }
 
 function render(){
@@ -234,7 +234,7 @@ async function handleFileUpload(file, idx) {
   }
   const { data: publicUrlData } = sb.storage.from('products').getPublicUrl(fileName);
   S.p[idx].img = publicUrlData.publicUrl;
-  $("nt").textContent = "Foto berhasil diunggah! Klik 'Simpan Ke Database Cloud'.";
+  $("nt").textContent = "Foto berhasil diunggah! Tekan 'Simpan Ke Database Cloud'.";
   render();
 }
 
@@ -287,4 +287,4 @@ document.addEventListener("click", function(e){
   else if(d.q!==undefined&&d.id){var pId=d.id,y=S.p.filter(function(p){return p.id===pId})[0],m=(cart[pId]||0)+(+d.q);if(m<1)delete cart[pId];else cart[pId]=Math.min(m,y?y.st:m);cartDraw()}
   else if(t.id==="open"){sheetOn=true;$("sheet").classList.add("on")}
   else if(t.id==="close"||t.id==="sheet"){sheetOn=false;$("sheet").classList.remove("on")}
-  else if(t.id==="fab"){csOpen=
+  else if(t.id==="fab"){csOpen=!csOpen;var c=document.querySelector(".cs");if(c)c.cla
